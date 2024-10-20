@@ -1,46 +1,40 @@
 import * as cheerio from 'cheerio'
 import { fetch } from 'ofetch'
-import { YOUTUBE_WATCH_URL } from './constants'
-import { extractBetweenMarkers } from './detect'
+import { CAPTION_TRACKS_REGEX, YOUTUBE_WATCH_URL } from './constants'
 import { parseJSON } from './parse'
 import type { CaptionLine, CaptionRaw, GetCaptionsOptions } from './types'
 
-function createWatchPageUrl(videoId: string): string {
-  return `${YOUTUBE_WATCH_URL}${videoId}&hl='en'&bpctr=${Math.ceil(Date.now() / 1000)}&has_verified=1`
-}
-
 async function getHTMLPageBody(id: string): Promise<string> {
-  const url = createWatchPageUrl(id)
+  const url = `${YOUTUBE_WATCH_URL}${id}`
   const response = await fetch(url)
   const body = await response.text()
   return body
 }
 
-async function getPlayerResponseText(id: string): Promise<string | null> {
+async function getCaptionTracksText(id: string): Promise<string | null> {
   const body = await getHTMLPageBody(id)
-  const text = extractBetweenMarkers(body, 'var ytInitialPlayerResponse = ', ';</script>')
-
-  if (text == null)
+  if (!body.includes('captionTracks'))
     return null
 
-  return text
+  const match = CAPTION_TRACKS_REGEX.exec(body)
+  if (!match)
+    return null
+
+  return match[0]
 }
 
 async function getCaptionsRaw(id: string, lang: string[] = [], asr = false): Promise<CaptionRaw[] | null> {
-  try {
-    const playerResponseText = await getPlayerResponseText(id)
-    if (!playerResponseText)
-      return null
-
-    const playerResponse = parseJSON(playerResponseText)
-    const captionTracks: CaptionRaw[] = playerResponse?.captions?.playerCaptionsTracklistRenderer?.captionTracks ?? []
-
-    const captionTracksFiltered = captionTracks.filter(caption => lang.length === 0 || lang.includes(caption.languageCode))
-    return asr ? captionTracksFiltered : captionTracksFiltered.filter(caption => caption.kind !== 'asr')
-  }
-  catch {
+  const captionTracksText = await getCaptionTracksText(id)
+  if (!captionTracksText)
     return null
-  }
+
+  const { captionTracks }: { captionTracks: CaptionRaw[] } = parseJSON(`{${captionTracksText}}`) ?? { captionTracks: [] }
+
+  const captionTracksFiltered = captionTracks.filter(caption =>
+    lang.length === 0 || lang.includes(caption.languageCode),
+  )
+
+  return captionTracksFiltered.filter(caption => asr || caption.kind !== 'asr')
 }
 
 async function processCaptions(urlMap: Map<string, string>): Promise<Map<string, CaptionLine[]>> {
@@ -70,10 +64,8 @@ async function processCaptions(urlMap: Map<string, string>): Promise<Map<string,
 export async function getCaptions(id: string, options?: GetCaptionsOptions): Promise<Map<string, CaptionLine[]> | null> {
   const { lang = [], asr = false } = options ?? {}
   const captionTracks = await getCaptionsRaw(id, lang, asr)
-
-  if (!captionTracks || captionTracks.length === 0) {
+  if (!captionTracks || captionTracks.length === 0)
     return null
-  }
 
   const urlMap = new Map<string, string>()
   captionTracks.forEach((caption) => {
