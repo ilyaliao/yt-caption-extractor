@@ -2,7 +2,7 @@ import * as cheerio from 'cheerio'
 import { fetch } from 'ofetch'
 import { CAPTION_TRACKS_REGEX, YOUTUBE_WATCH_URL } from './constants'
 import { parseJSON } from './parse'
-import type { CaptionLine, CaptionRaw, GetCaptionsOptions } from './types'
+import type { CaptionLine, CaptionRaw, GetCaptionsOptions, GetCaptionsReturn } from './types'
 
 async function getHTMLPageBody(id: string): Promise<string> {
   const url = `${YOUTUBE_WATCH_URL}${id}`
@@ -61,11 +61,11 @@ async function processCaptions(urlMap: Map<string, string>): Promise<Map<string,
   return resultMap
 }
 
-export async function getCaptions(id: string, options?: GetCaptionsOptions): Promise<Map<string, CaptionLine[]> | null> {
+export async function getCaptions(id: string, options?: GetCaptionsOptions): Promise<GetCaptionsReturn> {
   const { lang = [], asr = false } = options ?? {}
   const captionTracks = await getCaptionsRaw(id, lang, asr)
   if (!captionTracks || captionTracks.length === 0)
-    return null
+    return new Map()
 
   const urlMap = new Map<string, string>()
   captionTracks.forEach((caption) => {

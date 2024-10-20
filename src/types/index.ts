@@ -12,6 +12,8 @@ export interface GetCaptionsOptions {
   asr?: boolean
 }
 
+export type GetCaptionsReturn = Map<string, CaptionLine[]>
+
 export interface CaptionLine {
   /**
    * Caption start time.
