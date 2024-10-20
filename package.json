@@ -47,7 +47,8 @@
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
-    "cheerio": "^1.0.0"
+    "cheerio": "^1.0.0",
+    "ofetch": "^1.4.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.3.2",

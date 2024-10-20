@@ -1,4 +1,5 @@
 import * as cheerio from 'cheerio'
+import { fetch } from 'ofetch'
 import { YOUTUBE_WATCH_URL } from './constants'
 import { extractBetweenMarkers } from './detect'
 import { parseJSON } from './parse'
