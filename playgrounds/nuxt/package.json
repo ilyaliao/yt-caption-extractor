@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "packageManager": "pnpm@9.9.0",
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "start": "node .output/server/index.mjs"
+  },
+  "devDependencies": {
+    "nuxt": "^3.13.2",
+    "yt-caption-extractor": "file:../../dist"
+  },
+  "resolutions": {
+    "yt-caption-extractor": "file:../../dist"
+  }
+}
