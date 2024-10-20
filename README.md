@@ -6,11 +6,24 @@
 [![JSDocs][jsdocs-src]][jsdocs-href]
 [![License][license-src]][license-href]
 
-Extract YouTube Video captions
+Extract YouTube Video captions.
+
+## Usage
+
+```bash
+npm i yt-caption-extractor
+```
+
+```ts
+import { getCaptions } from 'yt-caption-extractor'
+
+const captions = await getCaptions('SX_ViT4Ra7k')
+console.log(captions)
+```
 
 ## License
 
-[MIT](./LICENSE) License © 2024-PRESENT [cofcat456](https://github.com/cofcat456)
+[MIT](./LICENSE) License © 2024-PRESENT [CofCat](https://github.com/cofcat456)
 
 <!-- Badges -->
 
