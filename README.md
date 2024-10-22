@@ -6,7 +6,7 @@
 [![JSDocs][jsdocs-src]][jsdocs-href]
 [![License][license-src]][license-href]
 
-Extract YouTube Video captions.
+Extract YouTube Video **lyrics** and **video information**.
 
 ## Usage
 
@@ -15,11 +15,18 @@ npm i yt-caption-extractor
 ```
 
 ```ts
-import { getCaptions } from 'yt-caption-extractor'
+import { getCaptions, getVideoInfo } from 'yt-caption-extractor'
 
 const captions = await getCaptions('SX_ViT4Ra7k')
 console.log(captions)
+
+const videoInfo = await getVideoInfo('SX_ViT4Ra7k')
+console.log(videoInfo)
 ```
+
+## Why?
+
+This library is tailor-made for [maru.re](https://maru.re/), designed to extract **lyrics** and **video information** from YouTube videos. Initially, I considered using [ytdl-core](https://github.com/distubejs/ytdl-core), but due to its large size and lack of ESM support, so I took an afternoon to create this library.
 
 ## License
 
