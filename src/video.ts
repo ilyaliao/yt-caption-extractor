@@ -1,4 +1,5 @@
 import { VIDEO_INFO_REGEX, YOUTUBE_WATCH_URL } from './constants'
+import { parseJSON } from './parse'
 import type { VideoInfo } from './types'
 
 export async function getHTMLPageBody(id: string): Promise<string> {
@@ -16,12 +17,7 @@ export async function getVideoInfo(id: string): Promise<VideoInfo | null> {
     return null
   }
 
-  try {
-    const videoDetailsString = videoDetailsMatch[1]
-    const videoDetails = JSON.parse(videoDetailsString)
-    return videoDetails
-  }
-  catch {
-    return null
-  }
+  const videoDetailsString = videoDetailsMatch[1]
+  const videoDetails = parseJSON<VideoInfo>(videoDetailsString)
+  return videoDetails
 }
