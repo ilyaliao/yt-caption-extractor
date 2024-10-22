@@ -1,4 +1,3 @@
-import fs from 'node:fs'
 import { VIDEO_INFO_REGEX, YOUTUBE_WATCH_URL } from './constants'
 import type { VideoInfo } from './types'
 
@@ -11,8 +10,6 @@ export async function getHTMLPageBody(id: string): Promise<string> {
 
 export async function getVideoInfo(id: string): Promise<VideoInfo | null> {
   const body = await getHTMLPageBody(id)
-
-  fs.writeFileSync('demo.txt', body, { encoding: 'utf8' })
 
   const videoDetailsMatch = body.match(VIDEO_INFO_REGEX)
   if (!videoDetailsMatch) {
