@@ -1,7 +1,7 @@
 {
   "name": "yt-caption-extractor",
   "type": "module",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "packageManager": "pnpm@9.9.0",
   "description": "Extract YouTube Video captions",
   "author": "CofCat <a25690756@gmail.com>",
