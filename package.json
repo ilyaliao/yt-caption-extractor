@@ -4,14 +4,14 @@
   "version": "0.0.6",
   "packageManager": "pnpm@9.9.0",
   "description": "Extract YouTube Video captions",
-  "author": "CofCat <a25690756@gmail.com>",
+  "author": "ilyaliao",
   "license": "MIT",
-  "homepage": "https://github.com/cofcat456/yt-caption-extractor#readme",
+  "homepage": "https://github.com/ilyaliao/yt-caption-extractor#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cofcat456/yt-caption-extractor.git"
+    "url": "git+https://github.com/ilyaliao/yt-caption-extractor.git"
   },
-  "bugs": "https://github.com/cofcat456/yt-caption-extractor/issues",
+  "bugs": "https://github.com/ilyaliao/yt-caption-extractor/issues",
   "keywords": [],
   "sideEffects": false,
   "exports": {

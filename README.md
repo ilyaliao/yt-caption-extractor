@@ -30,7 +30,7 @@ This library is tailor-made for [maru.re](https://maru.re/), designed to extract
 
 ## License
 
-[MIT](./LICENSE) License © 2024-PRESENT [CofCat](https://github.com/cofcat456)
+[MIT](./LICENSE) License © 2024-PRESENT [Ilya Liao](https://github.com/ilyaliao)
 
 <!-- Badges -->
 
@@ -40,7 +40,7 @@ This library is tailor-made for [maru.re](https://maru.re/), designed to extract
 [npm-downloads-href]: https://npmjs.com/package/yt-caption-extractor
 [bundle-src]: https://img.shields.io/bundlephobia/minzip/yt-caption-extractor?style=flat&colorA=080f12&colorB=1fa669&label=minzip
 [bundle-href]: https://bundlephobia.com/result?p=yt-caption-extractor
-[license-src]: https://img.shields.io/github/license/cofcat456/yt-caption-extractor.svg?style=flat&colorA=080f12&colorB=1fa669
-[license-href]: https://github.com/cofcat456/yt-caption-extractor/blob/main/LICENSE
+[license-src]: https://img.shields.io/github/license/ilyaliao/yt-caption-extractor.svg?style=flat&colorA=080f12&colorB=1fa669
+[license-href]: https://github.com/ilyaliao/yt-caption-extractor/blob/main/LICENSE
 [jsdocs-src]: https://img.shields.io/badge/jsdocs-reference-080f12?style=flat&colorA=080f12&colorB=1fa669
 [jsdocs-href]: https://www.jsdocs.io/package/yt-caption-extractor
